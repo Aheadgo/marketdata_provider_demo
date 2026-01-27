@@ -37,7 +37,7 @@ class Binance_md(IMarketDataProvider):
     try:
       async with websockets.connect(url, ping_interval=20) as ws:
         async for msg in ws:
-          print(msg)
+          # print(msg)
           data = json.loads(msg)
 
           k = data.get("k")
