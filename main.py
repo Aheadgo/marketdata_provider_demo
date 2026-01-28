@@ -3,7 +3,7 @@ from demo_md import Binance_md, bar_notifier
 from utility import Bardata
 
 # 使用on_bar作为回调函数
-async def on_bar(bar: Bardata):
+def on_bar(bar: Bardata):
   print(f"{bar.symbol} {bar.timestamp} {bar.close}")
 
 async def main():
