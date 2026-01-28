@@ -55,7 +55,7 @@ class Binance_md(IMarketDataProvider):
             close=float(k["c"])
           )
           if callback:
-            await callback(bar)
+            callback(bar)
     
     except asyncio.CancelledError:
       print(f"[{symbol}] websocket cancelled")
@@ -93,7 +93,7 @@ class bar_notifier(IBarCompletionNotifier):
     if symbol_timeframe_key not in self._events:
       self._events[symbol_timeframe_key] = asyncio.Event()
 
-  async def _notify_bar_completion(self, bar: Bardata) -> None:
+  def _notify_bar_completion(self, bar: Bardata) -> None:
     symbol_timeframe_key = f"{bar.symbol}_{bar.timeframe}"
 
     self._latest_bars[symbol_timeframe_key] = Bardata
@@ -107,7 +107,7 @@ class bar_notifier(IBarCompletionNotifier):
     
     for callback in symbol_callbacks:
       if callback:
-        await callback(bar)
+        callback(bar)
 
   
 
